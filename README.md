@@ -1,6 +1,10 @@
 # Inference code for the model described in the paper "Refinement of AlphaFold-Multimer structures with single sequence input" and PEZYFoldings in CASP15
 
+Refinement of AlphaFold-Multimer structures with single sequence input
+Toshiyuki Oda
+bioRxiv 2022.12.27.521991; doi: https://doi.org/10.1101/2022.12.27.521991
 
+<br><br>
 The the original AlphaFold2 and AlphaFold-Multimer were provided by DeepMind Technology Limited.
 XTus Inc. provides modified codes and parameters under the same licenses.
 Code: Apache License, Version 2.0
