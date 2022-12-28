@@ -8,10 +8,13 @@ Parameters: CC-BY 4.0
 
 
 ## Usage:
-If you have an environment which can run AlphaFold-Multimer without docker, you can get results with
-
+Download stereo_chemical_props.txt.
 ```
-python run_alphafold_custom.py --input_files example_files/testinput.pdb --output_dir example_files/testscore --random_seed 123 --max_template_date=2018-04-30 --db_preset full_dbs --model_preset multimer_sep --nouse_gpu_relax --norun_relax --num_multimer_predictions_per_model 1 --model_paths weights/refine_model_step2_20221104_weight_checkpoint.e4.npz  --custom_model_type prev_single --num_recycle 10 --output_prefix example_files/results/testout --save_metrics=False  --save_prevs=False 
+wget -q -P /app/alphafold/alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
+```
+If you have an environment which can run AlphaFold-Multimer without docker, you can get results with
+```
+python run_alphafold_custom.py --input_files example_files/ranked_0_T1065.pdb --output_dir example_files/results --random_seed 123 --max_template_date=2018-04-30 --db_preset full_dbs --model_preset multimer_sep --nouse_gpu_relax --norun_relax --num_multimer_predictions_per_model 1 --model_paths weights/afm_refine_g/afm_refine_g.npz  --custom_model_type prev_single --num_recycle 10 --output_prefix example_files/results/ranked_0_refined --save_metrics=False  --save_prevs=False 
 ```
 
 If you don't have, please wait.
@@ -21,13 +24,6 @@ If you don't have, please wait.
 1c9bc45a8bb8ca6533dc54634db556a4 *weights/afm_refine_g/afm_refine_g.npz
 2961f8f3667f0d5292ed0dd8e8386318 *weights/afm_refine_g/CASP15/afm_refine_g_casp15.npz
 ```
-
-
-
-## Reference:
-Refinement of AlphaFold-Multimer structures with single sequence input
-Toshiyuki Oda
-bioRxiv 2022.12.27.521991; doi: https://doi.org/10.1101/2022.12.27.521991
 
 
 ![header](imgs/header.jpg)
