@@ -6,6 +6,10 @@ Toshiyuki Oda<br>
 bioRxiv 2022.12.27.521991; doi: https://doi.org/10.1101/2022.12.27.521991<br>
 
 <br><br>
+## Parameter Files:
+https://figshare.com/articles/online_resource/afm_refine_g_20230110_zip/21856407
+
+<br><br>
 The the original AlphaFold2 and AlphaFold-Multimer were provided by DeepMind Technology Limited.
 XTus Inc. provides modified codes and parameters under the same licenses.<br>
 Code: Apache License, Version 2.0<br>
@@ -13,18 +17,16 @@ Parameters: CC-BY 4.0<br>
 
 
 ## Usage:
-Please set up git-lfs.
-Using conda, it will be
-```
-conda install -c conda-forge git-lfs
-git lfs install
-```
-But it depends on your environment.
-After setting up, clone this repo and DL resource files.
 ```
 git clone https://github.com/t-oda-ic/afm_refiner.git
 cd afm_refiner
 wget -q -P alphafold/common/ https://git.scicore.unibas.ch/schwede/openstructure/-/raw/7102c63615b64735c4941278d92b554ec94415f8/modules/mol/alg/src/stereo_chemical_props.txt
+mkdir weights
+cd weights
+wget https://figshare.com/ndownloader/files/38784144 -O afm_refine_g.zip
+unzip afm_refine_g.zip
+rm -r afm_refine_g.zip
+cd ..
 ```
 If you have an environment which can run AlphaFold-Multimer without docker, you will get results with
 ```
