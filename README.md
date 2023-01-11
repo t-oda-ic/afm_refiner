@@ -28,7 +28,7 @@ unzip afm_refine_g.zip
 rm -r afm_refine_g.zip
 cd ..
 ```
-If you have an environment which can run AlphaFold-Multimer without docker, you will get results with
+If you have an environment which can run AlphaFold-Multimer v2.2.0 without docker (or try https://github.com/t-oda-ic/afm_refiner/issues/1), you will get results with
 ```
  python run_alphafold_custom.py --random_seed 123 --max_template_date=2018-04-30 --db_preset full_dbs --model_preset multimer_sep --nouse_gpu_relax --norun_relax --num_multimer_predictions_per_model 1 --model_paths weights/afm_refine_g/afm_refine_g.npz  --custom_model_type prev_single --num_recycle 3 --save_metrics=False  --save_prevs=False --pdb_seqres_database_path dummy_database/dummy_fas.fas --template_mmcif_dir dummy_database/ --obsolete_pdbs_path dummy_database/dummy_obsolete.dat --uniref90_database_path dummy_database/dummy_fas.fas --mgnify_database_path dummy_database/dummy_fas.fas --bfd_database_path dummy_database/dummydb --uniclust30_database_path dummy_database/dummydb --uniprot_database_path dummy_database/dummy_fas.fas --output_dir example_files/results --input_files example_files/sample_input_T1065.pdb --output_prefix example_files/results/sample_result_T1065
 ```
