@@ -487,38 +487,39 @@ class AlphaFold_noresample(hk.Module):
           is_training=is_training,
           compute_loss=compute_loss,
           safe_key=safe_key)
-
+    num_iter = 0;
+    emb_config = self.config.embeddings_and_evoformer
+    
+    prev = {}
+    
+    if 'prev_pos' in non_ensembled_batch:
+      print("Use checkpoint prev_pos.");
+      prev['prev_pos'] = non_ensembled_batch['prev_pos']
+    elif 'prev_pos' in batch:
+      raise Exception("Insert prev_pos in non_ensembled_batch.");
+    else:
+      prev['prev_pos'] = jnp.zeros(
+          [num_residues, residue_constants.atom_type_num, 3])
+     
+    if 'prev_msa_first_row' in non_ensembled_batch:
+      print("Use checkpoint prev_msa_first_row.");
+      prev['prev_msa_first_row'] = non_ensembled_batch['prev_msa_first_row']
+    elif 'prev_msa_first_row' in batch:
+      raise Exception("Insert prev_msa_first_row in non_ensembled_batch.");
+    else:
+      prev['prev_msa_first_row'] = jnp.zeros(
+          [num_residues, emb_config.msa_channel])
+     
+    if 'prev_pair' in non_ensembled_batch:
+      print("Use checkpoint prev_pair.");
+      prev['prev_pair'] = non_ensembled_batch['prev_pair']
+    elif 'prev_pair' in batch:
+      raise Exception("Insert prev_pair in non_ensembled_batch.");
+    else:
+      prev['prev_pair'] = jnp.zeros(
+          [num_residues, num_residues, emb_config.pair_channel])
+    
     if self.config.num_recycle:
-      emb_config = self.config.embeddings_and_evoformer
-      
-      prev = {}
-      
-      if 'prev_pos' in non_ensembled_batch:
-        print("Use checkpoint prev_pos.");
-        prev['prev_pos'] = non_ensembled_batch['prev_pos']
-      elif 'prev_pos' in batch:
-        raise Exception("Insert prev_pos in non_ensembled_batch.");
-      else:
-        prev['prev_pos'] = jnp.zeros(
-            [num_residues, residue_constants.atom_type_num, 3])
-       
-      if 'prev_msa_first_row' in non_ensembled_batch:
-        print("Use checkpoint prev_msa_first_row.");
-        prev['prev_msa_first_row'] = non_ensembled_batch['prev_msa_first_row']
-      elif 'prev_msa_first_row' in batch:
-        raise Exception("Insert prev_msa_first_row in non_ensembled_batch.");
-      else:
-        prev['prev_msa_first_row'] = jnp.zeros(
-            [num_residues, emb_config.msa_channel])
-       
-      if 'prev_pair' in non_ensembled_batch:
-        print("Use checkpoint prev_pair.");
-        prev['prev_pair'] = non_ensembled_batch['prev_pair']
-      elif 'prev_pair' in batch:
-        raise Exception("Insert prev_pair in non_ensembled_batch.");
-      else:
-        prev['prev_pair'] = jnp.zeros(
-            [num_residues, num_residues, emb_config.pair_channel])
        
       if 'num_iter_recycling' not in batch and  'num_iter_recycling' in non_ensembled_batch :
         batch['num_iter_recycling'] = non_ensembled_batch['num_iter_recycling'];
@@ -557,8 +558,7 @@ class AlphaFold_noresample(hk.Module):
         return get_prev(ret), prevres, safe_key1
 
       prev, prevs, safe_key = hk.fori_loop(0, num_iter, recycle_body, (prev, prevs, safe_key))
-    else:
-      prev = {}
+    
 
     # Run extra iteration.
     ret = apply_network(prev=prev, recycle_idx=num_iter, safe_key=safe_key, compute_loss = compute_loss);
