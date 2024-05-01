@@ -43,6 +43,8 @@ conda install -y -c nvidia -c conda-forge \
       pip \
       python=3.9
       
+pip install --upgrade pip 
+pip install -r requirements.txt
 pip install 'jax[cuda]==0.3.15' -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
 
 
