@@ -36,21 +36,10 @@ cd ..
 conda create -n af2_22_2024
 conda activate af2_22_2024
 
-conda install -y -c nvidia -c conda-forge \
-      openmm=7.5.1 \
-      cudatoolkit==11.4 \
-      pdbfixer \
-      pip \
-      python=3.9
-      
-pip install --upgrade pip 
-pip install -r requirements.txt
-pip install 'jax[cuda]==0.3.15' -f https://storage.googleapis.com/jax-releases/jax_cuda_releases.html
+conda install -y -c nvidia -c conda-forge openmm=8.0.0 pdbfixer pip python=3.11 cuda==12.2.2
 
-
-# I don't think this step is needed unless you want to perform relax with this repository.
-# cd ＜Path to the directory of conda env af2_22_2024. possibly you can access with ${CONDA_PREFIX}＞/home/oda/miniforge3/envs/af2_22_2024/lib/python3.9/site-packages
-# patch -p0 < ＜Path to the directory you cloned this repository ＞/docker/openmm.patchpatching file simtk/openmm/app/topology.py
+pip3 install --upgrade pip --no-cache-dir 
+pip3 install -r requirements.txt  --no-cache-dir 
 ```
 
 ### Refine a sample complex.
