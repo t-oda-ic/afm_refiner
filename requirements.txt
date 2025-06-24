@@ -11,6 +11,6 @@ immutabledict==2.0.0
 ml-collections==0.1.0
 numpy==1.24.3
 pandas==2.0.3
-setuptools<72.0.0
+setuptools==78.1.1
 scipy==1.11.1
 tensorflow-cpu==2.16.1

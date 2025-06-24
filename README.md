@@ -36,7 +36,7 @@ cd ..
 conda create -n af2_22_2024
 conda activate af2_22_2024
 
-conda install -y -c nvidia -c conda-forge openmm=8.0.0 pdbfixer pip python=3.11 cuda==12.2.2
+conda install -y -c nvidia -c conda-forge openmm=8.0.0 pdbfixer pip python=3.11 cuda=12.2.2
 
 pip3 install --upgrade pip --no-cache-dir 
 pip3 install -r requirements.txt  --no-cache-dir 
